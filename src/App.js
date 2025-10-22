@@ -314,6 +314,28 @@ function App() {
             </div>
           </div>
 
+          {/* Behavioral Nudge Card */}
+          <div className={`${
+            themeColor === 'professional' ? 'bg-professional/10 border-professional/20' :
+            themeColor === 'ofw' ? 'bg-ofw/10 border-ofw/20' :
+            themeColor === 'recovery' ? 'bg-recovery/10 border-recovery/20' :
+            'bg-entrylevel/10 border-entrylevel/20'
+          } border rounded-lg p-4 mb-4`}>
+            <h3 className={`${
+              themeColor === 'professional' ? 'text-professional' :
+              themeColor === 'ofw' ? 'text-ofw' :
+              themeColor === 'recovery' ? 'text-recovery' :
+              'text-entrylevel'
+            } font-semibold mb-1`}>{user.nudge.title}</h3>
+            <p className="text-gray-700 text-sm mb-2">{user.nudge.message}</p>
+            <p className={`${
+              themeColor === 'professional' ? 'text-professional' :
+              themeColor === 'ofw' ? 'text-ofw' :
+              themeColor === 'recovery' ? 'text-recovery' :
+              'text-entrylevel'
+            } text-xs font-medium`}>{user.nudge.impact}</p>
+          </div>
+
           {/* Spending Summary */}
           <div className="bg-white rounded-lg shadow-md p-4 mb-4">
             <div className="flex justify-between items-center mb-2">
@@ -339,14 +361,7 @@ function App() {
               ))}
             </div>
           </div>
-          
-          {/* Behavioral Nudge Card */}
-          <div className={`bg-${themeColor}/10 border border-${themeColor}/20 rounded-lg p-4 mb-4`}>
-            <h3 className={`text-${themeColor} font-semibold mb-1`}>{user.nudge.title}</h3>
-            <p className="text-gray-700 text-sm mb-2">{user.nudge.message}</p>
-            <p className={`text-${themeColor} text-xs font-medium`}>{user.nudge.impact}</p>
-          </div>
-          
+
           {/* Recent Transactions */}
           <div className="bg-white rounded-lg shadow-md p-4 mb-4">
             <div className="flex justify-between items-center mb-4">
