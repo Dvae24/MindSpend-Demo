@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { 
-  Wallet, Home, Zap, Users, MessageCircle, ArrowLeft, 
-  ChevronRight, PieChart, Calendar, DollarSign
+import {
+  Wallet, Home, Zap, Users, MessageCircle, ArrowLeft,
+  ChevronRight, Calendar, DollarSign
 } from 'lucide-react';
 
 function App() {
@@ -219,13 +219,18 @@ function App() {
   const renderDashboard = () => {
     const user = getCurrentUser();
     if (!user) return null;
-    
+
     const themeColor = user.theme;
-    
+    const bgColorClass =
+      themeColor === 'professional' ? 'bg-professional' :
+      themeColor === 'ofw' ? 'bg-ofw' :
+      themeColor === 'recovery' ? 'bg-recovery' :
+      'bg-entrylevel';
+
     return (
       <div className="flex flex-col min-h-screen bg-gray-100">
         {/* Header */}
-        <header className={`bg-${themeColor} text-white p-4`}>
+        <header className={`${bgColorClass} text-white p-4`}>
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-xl font-bold">Hello, {user.name}</h1>
@@ -234,9 +239,81 @@ function App() {
             <Wallet size={24} />
           </div>
         </header>
-        
+
         {/* Main Content */}
-        <main className="flex-1 p-4 overflow-y-auto pb-20">
+        <main className="flex-1 p-4 overflow-y-auto pb-24">
+          {/* Demo Intro Card */}
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4 mb-4">
+            <p className="text-sm text-gray-700">
+              <span className="font-semibold">This is your dashboard.</span> All your money in one place—banks, GCash, Maya, everything.
+            </p>
+          </div>
+
+          {/* Connected Accounts */}
+          <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+            <h2 className="text-lg font-semibold text-gray-800 mb-3">Connected Accounts</h2>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold">
+                    BPI
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-medium text-gray-800">BPI Savings</p>
+                    <p className="text-xs text-gray-500">****1234</p>
+                  </div>
+                </div>
+                <span className="font-semibold text-gray-800">₱45,230</span>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">
+                    BDO
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-medium text-gray-800">BDO Checking</p>
+                    <p className="text-xs text-gray-500">****5678</p>
+                  </div>
+                </div>
+                <span className="font-semibold text-gray-800">₱12,850</span>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xs">
+                    GC
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-medium text-gray-800">GCash</p>
+                    <p className="text-xs text-gray-500">09XX XXX 1234</p>
+                  </div>
+                </div>
+                <span className="font-semibold text-gray-800">₱8,450</span>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold text-xs">
+                    M
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-medium text-gray-800">Maya</p>
+                    <p className="text-xs text-gray-500">09XX XXX 5678</p>
+                  </div>
+                </div>
+                <span className="font-semibold text-gray-800">₱3,280</span>
+              </div>
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600 font-medium">Total Balance</span>
+                <span className="text-xl font-bold text-green-600">₱69,810</span>
+              </div>
+            </div>
+          </div>
+
           {/* Spending Summary */}
           <div className="bg-white rounded-lg shadow-md p-4 mb-4">
             <div className="flex justify-between items-center mb-2">
@@ -415,19 +492,28 @@ function App() {
   const renderNudgesScreen = () => {
     const user = getCurrentUser();
     if (!user) return null;
-    
+
     const themeColor = user.theme;
+    const bgColorClass =
+      themeColor === 'professional' ? 'bg-professional' :
+      themeColor === 'ofw' ? 'bg-ofw' :
+      themeColor === 'recovery' ? 'bg-recovery' :
+      'bg-entrylevel';
     const userNudges = nudges[userType] || [];
-    
+
     return (
       <div className="flex flex-col min-h-screen bg-gray-100">
-        <header className={`bg-${themeColor} text-white p-4`}>
-          <div className="flex items-center">
-            <h1 className="text-xl font-bold">Behavioral Nudges</h1>
+        <header className={`${bgColorClass} text-white p-4`}>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-xl font-bold">Behavioral Nudges</h1>
+              <p className="text-sm opacity-90">June 2023</p>
+            </div>
+            <Zap size={24} />
           </div>
         </header>
-        
-        <main className="flex-1 p-4 overflow-y-auto pb-20">
+
+        <main className="flex-1 p-4 overflow-y-auto pb-24">
           <p className="text-gray-600 mb-4">
             Personalized insights based on your spending patterns and financial behavior.
           </p>
@@ -463,7 +549,7 @@ function App() {
           </div>
         </header>
         
-        <main className="flex-1 p-4 overflow-y-auto pb-20">
+        <main className="flex-1 p-4 overflow-y-auto pb-24">
           {/* Remittance Breakdown */}
           <div className="bg-white rounded-lg shadow-md p-4 mb-4">
             <h2 className="text-lg font-semibold text-gray-800 mb-3">Remittance Breakdown</h2>
@@ -545,7 +631,7 @@ function App() {
           </div>
         </header>
         
-        <main className="flex-1 p-4 overflow-y-auto pb-20">
+        <main className="flex-1 p-4 overflow-y-auto pb-24">
           <div className="bg-white rounded-lg shadow-md p-4 mb-4">
             <p className="text-sm text-gray-600 mb-4">
               Ask Peso AI about your finances and get personalized advice based on your spending patterns.
@@ -594,28 +680,33 @@ function App() {
   const renderGoalDetailScreen = () => {
     const user = getCurrentUser();
     if (!user || !expandedGoal) return null;
-    
+
     const goal = goals.find(g => g.id === expandedGoal);
     if (!goal) return null;
-    
+
     const themeColor = user.theme;
+    const bgColorClass =
+      themeColor === 'professional' ? 'bg-professional' :
+      themeColor === 'ofw' ? 'bg-ofw' :
+      themeColor === 'recovery' ? 'bg-recovery' :
+      'bg-entrylevel';
     const progressPercentage = Math.round((goal.saved / goal.target) * 100);
     const remaining = goal.target - goal.saved;
-    
+
     // Calculate months until deadline
     const deadlineDate = new Date(goal.deadline);
     const currentDate = new Date();
-    const monthsRemaining = (deadlineDate.getFullYear() - currentDate.getFullYear()) * 12 + 
+    const monthsRemaining = (deadlineDate.getFullYear() - currentDate.getFullYear()) * 12 +
                            (deadlineDate.getMonth() - currentDate.getMonth());
-    
+
     // Calculate required monthly savings
     const monthlySavingsRequired = monthsRemaining > 0 ? Math.ceil(remaining / monthsRemaining) : remaining;
-    
+
     return (
       <div className="flex flex-col min-h-screen bg-gray-100">
-        <header className={`bg-${themeColor} text-white p-4`}>
+        <header className={`${bgColorClass} text-white p-4`}>
           <div className="flex items-center">
-            <button 
+            <button
               onClick={() => setCurrentScreen('dashboard')}
               className="mr-2"
             >
@@ -624,8 +715,8 @@ function App() {
             <h1 className="text-xl font-bold">{goal.name}</h1>
           </div>
         </header>
-        
-        <main className="flex-1 p-4 overflow-y-auto pb-20">
+
+        <main className="flex-1 p-4 overflow-y-auto pb-24">
           <div className="bg-white rounded-lg shadow-md p-6 mb-4">
             <div className="flex justify-center items-center mb-4">
               <div className="relative w-32 h-32">
@@ -714,17 +805,22 @@ function App() {
   const renderTransactionDetailScreen = () => {
     const user = getCurrentUser();
     if (!user || !expandedTransaction) return null;
-    
+
     const transaction = transactions.find(t => t.id === expandedTransaction);
     if (!transaction) return null;
-    
+
     const themeColor = user.theme;
-    
+    const bgColorClass =
+      themeColor === 'professional' ? 'bg-professional' :
+      themeColor === 'ofw' ? 'bg-ofw' :
+      themeColor === 'recovery' ? 'bg-recovery' :
+      'bg-entrylevel';
+
     return (
       <div className="flex flex-col min-h-screen bg-gray-100">
-        <header className={`bg-${themeColor} text-white p-4`}>
+        <header className={`${bgColorClass} text-white p-4`}>
           <div className="flex items-center">
-            <button 
+            <button
               onClick={() => setCurrentScreen('dashboard')}
               className="mr-2"
             >
@@ -733,8 +829,8 @@ function App() {
             <h1 className="text-xl font-bold">Transaction Details</h1>
           </div>
         </header>
-        
-        <main className="flex-1 p-4 overflow-y-auto pb-20">
+
+        <main className="flex-1 p-4 overflow-y-auto pb-24">
           <div className="bg-white rounded-lg shadow-md p-6 mb-4">
             <div className="flex justify-center mb-6">
               <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
